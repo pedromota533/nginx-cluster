@@ -14,3 +14,14 @@ data:
         index index.html;
       }
     }
+
+    server {
+      listen 80;
+      server_name draw.wsl.local;
+
+      location / {
+        proxy_pass http://excalidraw.excalidraw.svc.cluster.local:80;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+      }
+    }
